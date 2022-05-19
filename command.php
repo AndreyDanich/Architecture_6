@@ -3,33 +3,58 @@ interface ICommand {
     public function execute();
 }
 
-
-
-
-
-class QiwiPay implements PayInterface
+class СopyText implements ICommand
 {
-    public function pay()
+    public function execute()
     {
 
     }
 }
 
-class YandexPay implements PayInterface
+class PasteText implements ICommand
 {
-    public function pay()
+    public function execute()
     {
         
     }
 }
 
-class WebMoneyPay implements PayInterface
+class СutText implements ICommand
 {
-    public function pay()
+    public function execute()
     {
       
     }
 }
+
+class Cancel implements ICommand 
+{
+    protected ICommand $cancelCommand;
+
+    public function __construct(ICommand $cancelCommand)
+    {
+        $this->cancelCommand = $cancelCommand;
+    }
+
+    public function execute()
+    {
+        
+    }
+}
+
+class Edit {
+    public function run(ICommand $command)
+    {
+        $command->execute();
+    }
+}
+
+
+
+$edit = new Edit();
+$edit->run(new СopyText());
+$edit->run(new PasteText());
+$edit->run(new СutText());
 
 class Payment {
     protected PayInterface $payStrategy;
