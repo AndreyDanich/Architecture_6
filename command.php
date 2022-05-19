@@ -56,29 +56,3 @@ $edit->run(new СopyText());
 $edit->run(new PasteText());
 $edit->run(new СutText());
 
-class Payment {
-    protected PayInterface $payStrategy;
-
-    public function __construct(PayInterface $payStrategy)
-    {
-        $this->payStrategy = $payStrategy;
-    }
-
-    public function run()
-    {
-        $users = $this->getUsers();
-        foreach ($users as $user){
-            $this->payStrategy->pay();
-        }
-    }
-
-    protected function getUsers() {
-        return [];
-    }
-}
-
-$manager = new Payment(
-    new YandexPay()
-);
-
-$manager->run();
