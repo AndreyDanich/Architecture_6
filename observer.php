@@ -33,7 +33,7 @@ class Applicant
     }
 }
 
-class Subscribe implements IObserver
+class Subscriber implements IObserver
 {
     public function handle()
     {
@@ -43,6 +43,11 @@ class Subscribe implements IObserver
 
 $user = [];
 $manager = new Applicant();
-if($manager->register($user)){
-    subscribe($user);
-}
+$manager->attachObserver(
+    new Subscriber()
+);
+$manager->detachObserver(
+    new Subscriber()
+);
+
+function subscribe($user){}
